@@ -3,25 +3,25 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from .models import Poll, Choice, User
-from .serializers import PollSerializer, ChoiceSerializer, VoteSerializer, UserSerializer
+from .models import Material, Plant, User
+from .serializers import MaterialSerializer, PlantSerializer, VoteSerializer, UserSerializer
 
 
 
-class PollList(generics.ListCreateAPIView):
-    queryset = Poll.objects.all()
-    serializer_class = PollSerializer
+class MaterialList(generics.ListCreateAPIView):
+    queryset = Material.objects.all()
+    serializer_class = MaterialSerializer
 
 
-class PollDetail(generics.RetrieveDestroyAPIView):
-    queryset = Poll.objects.all()
-    serializer_class = PollSerializer
+class MaterialDetail(generics.RetrieveDestroyAPIView):
+    queryset = Material.objects.all()
+    serializer_class = MaterialSerializer
 
-class ChoiceList(generics.ListCreateAPIView):
+class PlantList(generics.ListCreateAPIView):
     def get_queryset(self):
-        queryset = Choice.objects.filter(poll_id=self.kwargs["pk"])
+        queryset = Plant.objects.filter(poll_id=self.kwargs["pk"])
         return queryset
-    serializer_class = ChoiceSerializer
+    serializer_class = PlantSerializer
 
 
 class CreateVote(APIView):
@@ -37,9 +37,9 @@ class CreateVote(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class PollViewSet(viewsets.ModelViewSet):
-    queryset = Poll.objects.all()
-    serializer_class = PollSerializer
+class MaterialViewSet(viewsets.ModelViewSet):
+    queryset = Material.objects.all()
+    serializer_class = MaterialSerializer
 
 from rest_framework.authtoken.models import Token
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Poll, Choice
+from .models import Material, Plant
 
-admin.site.register(Poll)
-admin.site.register(Choice)
+admin.site.register(Material)
+admin.site.register(Plant)

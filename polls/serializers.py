@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Poll, Choice, Vote
+from .models import Material, Plant, Vote
 
 from django.contrib.auth.models import User
 
@@ -11,19 +11,19 @@ class VoteSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ChoiceSerializer(serializers.ModelSerializer):
+class PlantSerializer(serializers.ModelSerializer):
     votes = VoteSerializer(many=True, required=False)
 
     class Meta:
-        model = Choice
+        model = Plant
         fields = '__all__'
 
 
-class PollSerializer(serializers.ModelSerializer):
-    choices = ChoiceSerializer(many=True, read_only=True, required=False)
+class MaterialSerializer(serializers.ModelSerializer):
+    choices = PlantSerializer(many=True, read_only=True, required=False)
 
     class Meta:
-        model = Poll
+        model = Material
         fields = '__all__'
 
 
